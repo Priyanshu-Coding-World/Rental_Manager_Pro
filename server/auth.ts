@@ -46,9 +46,9 @@ export function setupAuth(app: Express) {
         return done(null, false, { message: "Invalid username" });
       }
 
-      // Special case for initial seed password without hash
-      if (user.password === "password123") {
-         if (password === "password123") return done(null, user);
+      if (!user.password.includes(".")) {
+        if (password === user.password) return done(null, user);
+        return done(null, false, { message: "Invalid password" });
       }
 
       const isValid = await crypto.compare(password, user.password);
