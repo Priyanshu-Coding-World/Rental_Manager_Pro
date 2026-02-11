@@ -1,0 +1,153 @@
+Create a complete web-based Rental Management System using:
+
+Frontend: HTML, CSS, JavaScript  
+Backend: PHP  
+Database: MySQL  
+
+The project should be structured and realistic for a final year BCA project.
+
+-------------------------------------
+PROJECT DESCRIPTION
+-------------------------------------
+
+Build a Rental Management System that allows an Admin to manage rental properties, tenants, leases, and payments. The system should reduce manual paperwork and maintain rental records digitally.
+
+-------------------------------------
+CORE FEATURES
+-------------------------------------
+
+1. Authentication System
+- Login page for Admin
+- Secure login using PHP sessions
+- Password stored securely (hashed)
+- Logout functionality
+
+2. Admin Dashboard
+- Display total properties
+- Display total tenants
+- Display total monthly income
+- Display pending payments
+
+3. Property Management (CRUD)
+- Add property (name, type, location, rent amount, status)
+- Edit property details
+- Delete property
+- View property list
+- Status: Available / Occupied
+
+4. Tenant Management (CRUD)
+- Add tenant (name, phone, email, address)
+- Assign tenant to property
+- Edit tenant details
+- Delete tenant
+- View tenant list
+
+5. Lease Management
+- Create lease (tenant + property + start date + end date)
+- Update lease status
+- Auto-mark property as occupied when leased
+
+6. Payment Management
+- Record rent payments
+- View payment history
+- Payment status (Paid / Pending)
+- Filter payments by month
+
+7. Report Section
+- Monthly rent collection report
+- Pending payment report
+- Occupancy report
+
+-------------------------------------
+DATABASE DESIGN (MySQL)
+-------------------------------------
+
+Create database: rental_management
+
+Tables:
+
+1. admins
+- id (INT, PK, AUTO_INCREMENT)
+- username (VARCHAR)
+- password (VARCHAR)
+
+2. properties
+- id (INT, PK)
+- property_name (VARCHAR)
+- type (VARCHAR)
+- location (VARCHAR)
+- rent_amount (DECIMAL)
+- status (ENUM: Available, Occupied)
+
+3. tenants
+- id (INT, PK)
+- name (VARCHAR)
+- phone (VARCHAR)
+- email (VARCHAR)
+- address (TEXT)
+
+4. leases
+- id (INT, PK)
+- tenant_id (FK)
+- property_id (FK)
+- start_date (DATE)
+- end_date (DATE)
+
+5. payments
+- id (INT, PK)
+- tenant_id (FK)
+- amount (DECIMAL)
+- payment_date (DATE)
+- status (ENUM: Paid, Pending)
+
+-------------------------------------
+UI REQUIREMENTS
+-------------------------------------
+
+- Clean and modern dashboard design
+- Responsive layout
+- Sidebar navigation
+- Simple color theme (blue/white or dark theme)
+- Tables styled properly
+- Use basic JavaScript for form validation
+
+-------------------------------------
+FOLDER STRUCTURE
+-------------------------------------
+
+/rental-management
+    /css
+    /js
+    /includes
+    dashboard.php
+    login.php
+    logout.php
+    properties.php
+    tenants.php
+    leases.php
+    payments.php
+    reports.php
+    config.php
+    database.sql
+
+-------------------------------------
+TECHNICAL REQUIREMENTS
+-------------------------------------
+
+- Use PHP procedural or OOP (simple structure)
+- Use mysqli or PDO
+- Use prepared statements for security
+- Use PHP sessions for authentication
+- Include database.sql file
+- Add comments in code
+- Ensure project runs on XAMPP
+
+-------------------------------------
+EXTRA (If Possible)
+-------------------------------------
+
+- Add search functionality
+- Add filter by date
+- Add simple charts using JavaScript (optional)
+
+Make the project beginner-friendly but professional enough for a final year presentation.
