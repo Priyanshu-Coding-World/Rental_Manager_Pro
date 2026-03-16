@@ -27,6 +27,8 @@ export default function Leases() {
   const form = useForm<LeaseFormValues>({
     resolver: zodResolver(insertLeaseSchema),
     defaultValues: {
+      propertyId: 0,
+      tenantId: 0,
       isActive: true,
       rentAmount: 0,
       startDate: "",

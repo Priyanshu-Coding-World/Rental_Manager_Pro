@@ -29,6 +29,7 @@ export default function Payments() {
   const form = useForm<PaymentFormValues>({
     resolver: zodResolver(insertPaymentSchema),
     defaultValues: {
+      leaseId: 0,
       amount: 0,
       paymentDate: new Date().toISOString().split('T')[0],
       status: "Pending",

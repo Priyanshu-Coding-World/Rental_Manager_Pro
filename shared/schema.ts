@@ -56,10 +56,19 @@ export const payments = pgTable("payments", {
 
 // Schemas
 export const insertUserSchema = createInsertSchema(users).omit({ id: true, createdAt: true });
-export const insertPropertySchema = createInsertSchema(properties).omit({ id: true, createdAt: true });
+export const insertPropertySchema = createInsertSchema(properties, {
+  rentAmount: z.coerce.number().min(0, "Rent amount must be positive"),
+}).omit({ id: true, createdAt: true });
 export const insertTenantSchema = createInsertSchema(tenants).omit({ id: true, createdAt: true });
-export const insertLeaseSchema = createInsertSchema(leases).omit({ id: true, createdAt: true });
-export const insertPaymentSchema = createInsertSchema(payments).omit({ id: true, createdAt: true });
+export const insertLeaseSchema = createInsertSchema(leases, {
+  rentAmount: z.coerce.number().min(0, "Rent amount must be positive"),
+  propertyId: z.coerce.number().min(1, "Please select a property"),
+  tenantId: z.coerce.number().min(1, "Please select a tenant"),
+}).omit({ id: true, createdAt: true });
+export const insertPaymentSchema = createInsertSchema(payments, {
+  amount: z.coerce.number().min(0, "Amount must be positive"),
+  leaseId: z.coerce.number().min(1, "Please select a lease"),
+}).omit({ id: true, createdAt: true });
 
 // Types
 export type User = typeof users.$inferSelect;

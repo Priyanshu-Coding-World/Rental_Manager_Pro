@@ -84,12 +84,17 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createProperty(property: InsertProperty): Promise<Property> {
-    const [newProperty] = await db.insert(properties).values(property).returning();
+    const [newProperty] = await db.insert(properties).values({
+      ...property,
+      rentAmount: String(property.rentAmount),
+    }).returning();
     return newProperty;
   }
 
   async updateProperty(id: number, property: Partial<InsertProperty>): Promise<Property> {
-    const [updated] = await db.update(properties).set(property).where(eq(properties.id, id)).returning();
+    const values: any = { ...property };
+    if (values.rentAmount !== undefined) values.rentAmount = String(values.rentAmount);
+    const [updated] = await db.update(properties).set(values).where(eq(properties.id, id)).returning();
     return updated;
   }
 
@@ -125,7 +130,10 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createLease(lease: InsertLease): Promise<Lease> {
-    const [newLease] = await db.insert(leases).values(lease).returning();
+    const [newLease] = await db.insert(leases).values({
+      ...lease,
+      rentAmount: String(lease.rentAmount),
+    }).returning();
     
     // Auto-mark property as occupied
     await db.update(properties)
@@ -136,7 +144,9 @@ export class DatabaseStorage implements IStorage {
   }
 
   async updateLease(id: number, lease: Partial<InsertLease>): Promise<Lease> {
-    const [updated] = await db.update(leases).set(lease).where(eq(leases.id, id)).returning();
+    const values: any = { ...lease };
+    if (values.rentAmount !== undefined) values.rentAmount = String(values.rentAmount);
+    const [updated] = await db.update(leases).set(values).where(eq(leases.id, id)).returning();
     return updated;
   }
 
@@ -145,12 +155,17 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createPayment(payment: InsertPayment): Promise<Payment> {
-    const [newPayment] = await db.insert(payments).values(payment).returning();
+    const [newPayment] = await db.insert(payments).values({
+      ...payment,
+      amount: String(payment.amount),
+    }).returning();
     return newPayment;
   }
 
   async updatePayment(id: number, payment: Partial<InsertPayment>): Promise<Payment> {
-    const [updated] = await db.update(payments).set(payment).where(eq(payments.id, id)).returning();
+    const values: any = { ...payment };
+    if (values.amount !== undefined) values.amount = String(values.amount);
+    const [updated] = await db.update(payments).set(values).where(eq(payments.id, id)).returning();
     return updated;
   }
 

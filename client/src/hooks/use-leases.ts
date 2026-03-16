@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, type InsertLease } from "@shared/routes";
+import { api } from "@shared/routes";
+import type { InsertLease } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 
 export function useLeases() {
